@@ -46,7 +46,7 @@ int main()
                 in[i][j].value=tmp-'0';
                 in[i][j].candidate_cnt=-1;
             }
-            else
+            else if(tmp==' ')
             {
                 in[i][j].empty=false;
                 in[i][j].candidate_cnt=0;
@@ -105,6 +105,39 @@ int box_test(int x,int y)//box test starts
             }
         }
     }
+    
+    for(int i=y;i<y+3;i++)
+    {
+        for(int j=x;j<x+3;j++)
+        {
+            if(in[i][j].empty==true)
+            {
+                for(int k=0;k<N;k++)
+                {
+                    if(missing[k]==1)
+                    {
+                        in[i][j].candidate[in[i][j].candidate_cnt]=k+1;
+                        in[i][j].candidate_cnt++;
+                    }
+                }
+            }
+        }
+    }
+    for(int i=0;i<N;i++)
+    {
+        if(in[y][i].empty==true)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(missing[j]==1)
+                {
+                    in[y][i].candidate[in[y][i].candidate_cnt]=j+1;
+                    in[y][i].candidate_cnt++;
+                }
+            }
+        }
+    }
+    
     return 0;
 }//box test ends
 
@@ -123,6 +156,21 @@ int vertical_line_test(int x)//vertical line test starts
             missing[in[i][x].value-1]=0;
         }
     }
+    for(int i=0;i<N;i++)
+    {
+        if(in[i][x].empty==true)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(missing[j]==1)
+                {
+                    in[i][x].candidate[in[i][x].candidate_cnt]=j+1;
+                    in[i][x].candidate_cnt++;
+                }
+            }
+        }
+    }
+    
     return 0;
 }//vertical line test starts
 
@@ -139,6 +187,20 @@ int horizontal_line_test(int y)//horizontal line starts
         if(in[y][i].empty==false)
         {
             missing[in[y][i].value-1]=0;
+        }
+    }
+    for(int i=0;i<N;i++)
+    {
+        if(in[y][i].empty==true)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(missing[j]==1)
+                {
+                    in[y][i].candidate[in[y][i].candidate_cnt]=j+1;
+                    in[y][i].candidate_cnt++;
+                }
+            }
         }
     }
     
