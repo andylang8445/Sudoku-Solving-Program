@@ -93,3 +93,22 @@ int vertical_line_test(int x)
     }
     return 0;
 }
+
+int horizontal_line_test(int y)
+{
+    int missing[N];
+    
+    for(int i=0;i<N;i++)
+    {
+        missing[i]=1;
+    }
+    for(int i=0;i<N;i++)
+    {
+        if(in[y][i].empty==false)
+        {
+            missing[in[y][i].value-1]=0;
+        }
+    }
+    
+    return 0;
+}
