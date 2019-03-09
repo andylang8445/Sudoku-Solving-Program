@@ -28,6 +28,7 @@ int vertical_line_test(int x);
 
 int main()
 {
+    int sum=0;
     char tmp;
     
     //input the original empty sudoku with N*N size
@@ -54,22 +55,35 @@ int main()
     }//input & empty test & save cordinates of the location end
     
     //check function starts
-    for(int i=0;i<N;i++)
+    while(1)
     {
-        for(int j=0;j<N;j++)
+        sum=0;
+        for(int i=0;i<N;i++)
         {
-            if(i==0||i==3||i==6)
+            for(int j=0;j<N;j++)
             {
-                if(j==0||j==3||j==6)
+                if(i==0||i==3||i==6)
                 {
-                    box_test(j, i);
+                    if(j==0||j==3||j==6)
+                    {
+                        box_test(j, i);
+                    }
                 }
+                horizontal_line_test(i);
+                vertical_line_test(j);
+                
             }
-            horizontal_line_test(i);
-            vertical_line_test(j);
-            
+        }//check function ends
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                sum+=in[i][j].value;
+            }
         }
-    }//check function ends
+        if(sum==405)
+            break;
+    }
     
 }//main function end
 
