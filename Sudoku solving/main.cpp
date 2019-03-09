@@ -23,6 +23,8 @@ struct sudoku{
 sudoku in[N][N];
 
 int box_test(int x,int y);
+int horizontal_line_test(int y);
+int vertical_line_test(int x);
 
 int main()
 {
@@ -56,8 +58,7 @@ int main()
 
 int box_test(int x,int y)
 {
-    int missing[N];
-    int tmp;
+    int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
     for(int i=0;i<N;i++)
     {
@@ -78,7 +79,7 @@ int box_test(int x,int y)
 
 int vertical_line_test(int x)
 {
-    int missing[N];
+    int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
     for(int i=0;i<N;i++)
     {
@@ -96,7 +97,7 @@ int vertical_line_test(int x)
 
 int horizontal_line_test(int y)
 {
-    int missing[N];
+    int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
     for(int i=0;i<N;i++)
     {
