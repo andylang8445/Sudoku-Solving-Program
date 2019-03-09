@@ -51,7 +51,9 @@ int main()
                 in[i][j].candidate_cnt=0;
             }
         }
-    }
+    }//input & empty test & save cordinates of the location end
+    
+    //check function starts
     for(int i=0;i<N;i++)
     {
         for(int j=0;j<N;j++)
@@ -67,11 +69,11 @@ int main()
             vertical_line_test(j);
             
         }
-    }
+    }//check function ends
     
-}
+}//main function end
 
-int box_test(int x,int y)
+int box_test(int x,int y)//box test starts
 {
     int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
@@ -90,9 +92,9 @@ int box_test(int x,int y)
         }
     }
     return 0;
-}
+}//box test ends
 
-int vertical_line_test(int x)
+int vertical_line_test(int x)//vertical line test starts
 {
     int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
@@ -108,9 +110,9 @@ int vertical_line_test(int x)
         }
     }
     return 0;
-}
+}//vertical line test starts
 
-int horizontal_line_test(int y)
+int horizontal_line_test(int y)//horizontal line starts
 {
     int missing[N];//if missing array is 1, the number '(the number of array)+1' is missing
     
@@ -127,4 +129,4 @@ int horizontal_line_test(int y)
     }
     
     return 0;
-}
+}//horizontal line ends
