@@ -52,7 +52,22 @@ int main()
             }
         }
     }
-    
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<N;j++)
+        {
+            if(i==0||i==3||i==6)
+            {
+                if(j==0||j==3||j==6)
+                {
+                    box_test(j, i);
+                }
+            }
+            horizontal_line_test(i);
+            vertical_line_test(j);
+            
+        }
+    }
     
 }
 
