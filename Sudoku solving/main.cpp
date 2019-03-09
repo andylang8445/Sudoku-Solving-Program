@@ -28,7 +28,6 @@ int vertical_line_test(int x);
 
 int main()
 {
-    int sum=0;
     char tmp;
     
     //input the original empty sudoku with N*N size
@@ -54,35 +53,38 @@ int main()
         }
     }//input & empty test & save cordinates of the location end
     
-    //check function starts
-    while(1)
+    //check function start
+    for(int i=0;i<N;i++)
     {
-        sum=0;
-        for(int i=0;i<N;i++)
+        for(int j=0;j<N;j++)
         {
-            for(int j=0;j<N;j++)
+            if(i%3==0)
             {
-                if(i==0||i==3||i==6)
+                if(j%3==0)
                 {
-                    if(j==0||j==3||j==6)
-                    {
-                        box_test(j, i);
-                    }
+                    box_test(j, i);
                 }
-                horizontal_line_test(i);
-                vertical_line_test(j);
-                
             }
-        }//check function ends
-        for(int i=0;i<N;i++)
+            horizontal_line_test(i);
+            vertical_line_test(j);
+            
+        }
+    }//check function end
+    
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<N;j++)
         {
-            for(int j=0;j<N;j++)
+            if(in[i][j].empty==false)
             {
-                sum+=in[i][j].value;
+                for(int k=0;k<N;k++)
+                {
+                    in[i][k].candidate[in[i][j].value-1]=0;
+                    in[k][j].candidate[in[i][j].value-1]=0;
+                    
+                }
             }
         }
-        if(sum==405)
-            break;
     }
     
 }//main function end
@@ -116,8 +118,7 @@ int box_test(int x,int y)//box test starts
                 {
                     if(missing[k]==1)
                     {
-                        in[i][j].candidate[in[i][j].candidate_cnt]=k+1;
-                        in[i][j].candidate_cnt++;
+                        in[i][j].candidate[k]=1;
                     }
                 }
             }
@@ -131,8 +132,7 @@ int box_test(int x,int y)//box test starts
             {
                 if(missing[j]==1)
                 {
-                    in[y][i].candidate[in[y][i].candidate_cnt]=j+1;
-                    in[y][i].candidate_cnt++;
+                    in[y][i].candidate[j]=1;
                 }
             }
         }
@@ -164,8 +164,7 @@ int vertical_line_test(int x)//vertical line test starts
             {
                 if(missing[j]==1)
                 {
-                    in[i][x].candidate[in[i][x].candidate_cnt]=j+1;
-                    in[i][x].candidate_cnt++;
+                    in[i][x].candidate[j]=1;
                 }
             }
         }
@@ -197,8 +196,7 @@ int horizontal_line_test(int y)//horizontal line starts
             {
                 if(missing[j]==1)
                 {
-                    in[y][i].candidate[in[y][i].candidate_cnt]=j+1;
-                    in[y][i].candidate_cnt++;
+                    in[y][i].candidate[j]=1;
                 }
             }
         }
