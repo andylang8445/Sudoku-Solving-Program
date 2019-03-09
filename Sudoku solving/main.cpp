@@ -81,7 +81,7 @@ int main()
                 {
                     in[i][k].candidate[in[i][j].value-1]=0;
                     in[k][j].candidate[in[i][j].value-1]=0;
-                    
+                    //need to add the box candidant deleting solution
                 }
             }
         }
