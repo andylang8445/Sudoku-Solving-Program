@@ -32,6 +32,7 @@ int main()
     
     //input the original empty sudoku with N*N size
     //set the variables in the structure sudoku
+    printf("Program_start_test\n");
     for(int i=0;i<N;i++)
     {
         for(int j=0;j<N;j++)
@@ -79,14 +80,27 @@ int main()
             {
                 for(int k=0;k<N;k++)
                 {
-                    in[i][k].candidate[in[i][j].value-1]=0;
-                    in[k][j].candidate[in[i][j].value-1]=0;
-                    
-                    //need to add the box candidant deleting solution
-                    /*
-                     
-                     */
+                    in[i][k].candidate[in[i][j].value-1]=0;//vertical candidate deleting
+                    in[k][j].candidate[in[i][j].value-1]=0;//horizontal candidate deleting
                 }
+                //box candidant deleting algorithm start
+                int tmp_deleting_candidate;//save the numbber that is already filled, to delete from the cadidate list in that block
+                tmp_deleting_candidate=in[i][j].value;
+                for(int k=i-(i%3);k<i-(i%3)+3;k++)
+                {
+                    for(int l=j-(j%3);l<j-(j%3)+3;l++)
+                    {
+                        in[i][j].candidate[tmp_deleting_candidate-1]=0;//delete the  number from candidate list in that blbock
+                    }
+                }
+                //box candidant deleting algorythm end
+                /*
+                 explanation of how does box deleting algorithm works
+                    set the first cordinate of the box ((0,0) point) by subtracting the relative location of the current point
+                    run the searching loop in the 3*3 box
+                    delete the number from the variable "tmp_deleting_candidate" at all the candidate lists included in that 3*3 box
+                    Run exactly the same algorithm for every know point.
+                 */
             }
         }
     }
