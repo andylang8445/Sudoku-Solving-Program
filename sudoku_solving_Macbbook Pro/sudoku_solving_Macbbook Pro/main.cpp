@@ -21,6 +21,7 @@ struct sudoku{
 };
 
 sudoku in[N][N];
+int blank_count=0;
 
 int box_test(int x,int y);
 int horizontal_line_test(int y);
@@ -28,6 +29,8 @@ int vertical_line_test(int x);
 
 int main()
 {
+    int cnt=0;
+    int only_candidate;
     char tmp;
     
     //input the original empty sudoku with N*N size
@@ -50,6 +53,7 @@ int main()
             {
                 in[i][j].empty=false;
                 in[i][j].candidate_cnt=0;
+                blank_count++;
             }
         }
     }//input & empty test & save cordinates of the location end
@@ -76,6 +80,28 @@ int main()
     {
         for(int j=0;j<N;j++)
         {
+            /*
+             if there is an blank, check if there is single candidate for that blank
+                if so, mark the blank as 'filled', subtract one from the variable, "blank_count"and put the candidate in the value section of that structure
+            */
+            if(in[i][j].empty==true)
+            {
+                for(int k=0;k<N;k++)
+                {
+                    if(in[i][j].candidate[k]==1)
+                    {
+                        cnt++;
+                        only_candidate=k+1;
+                    }
+                }
+                if(cnt==1)
+                {
+                    in[i][j].empty=false;
+                    in[i][j].value=only_candidate;
+                    blank_count--;
+                }
+            }
+            
             if(in[i][j].empty==false)
             {
                 for(int k=0;k<N;k++)
@@ -104,7 +130,12 @@ int main()
             }
         }
     }
-    
+    if(blank_count==0)
+        printf("Solving successfully finalized.");
+    else if(blank_count>0)
+        printf("There is %d bblank uncompleted.",blank_count);
+    else
+        printf("%d blanks replaced.",blank_count*(-1));
 }//main function end
 
 int box_test(int x,int y)//box test starts
